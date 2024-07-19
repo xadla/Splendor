@@ -7,47 +7,24 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    ui->homescreen_bg_lb->hide();
-    ui->name_lb->hide();
-    ui->name_le->hide();
-    ui->signin_bt->hide();
-    ui->signup_bt->hide();
+    connect(&loadingPage, &Loading::showHomeScreen, this, &MainWindow::HomeScreen);
 
-    connect(this, &MainWindow::showHomeScreen, this, &MainWindow::HomeScreen);
-
-    LoadingProcess();
-
+    QTimer::singleShot(0, this, &MainWindow::showLoading);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete timerForLoading;
 }
 
-void MainWindow::LoadingProcess()
+void MainWindow::showLoading()
 {
-    timerForLoading = new QTimer();
-    connect(timerForLoading, &QTimer::timeout, this, &MainWindow::UpdateLoadingPB);
-    timerForLoading->start(500);
-}
-
-void MainWindow::UpdateLoadingPB()
-{
-    int currentTime = ui->loading_pb->value();
-    if (currentTime < 100) {
-        ui->loading_pb->setValue(currentTime + 10);
-    } else {
-        timerForLoading->stop();
-        emit showHomeScreen();
-    }
+    this->hide();
+    loadingPage.show();
 }
 
 void MainWindow::HomeScreen()
 {
-    ui->homescreen_bg_lb->show();
-    ui->name_lb->show();
-    ui->name_le->show();
-    ui->signin_bt->show();
-    ui->signup_bt->show();
+    loadingPage.hide();
+    this->show();
 }

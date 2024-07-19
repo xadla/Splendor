@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include "Loading.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -22,11 +23,13 @@ protected:
     Ui::MainWindow *ui;
 
 private:
-    void LoadingProcess();
-    void UpdateLoadingPB();
-    QTimer *timerForLoading;
+
+    void showLoading();
 
     void HomeScreen();
+
+    Loading loadingPage;
+
 
 signals:
     void showHomeScreen();
