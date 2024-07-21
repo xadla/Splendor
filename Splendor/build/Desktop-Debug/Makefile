@@ -52,15 +52,23 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../../Loading.cpp \
+SOURCES       = ../../Game.cpp \
+		../../Loading.cpp \
+		../../Player.cpp \
+		../../ShowMessage.cpp \
 		../../main.cpp \
 		../../MainWindow.cpp qrc_images.cpp \
+		moc_Game.cpp \
 		moc_Loading.cpp \
 		moc_MainWindow.cpp
-OBJECTS       = Loading.o \
+OBJECTS       = Game.o \
+		Loading.o \
+		Player.o \
+		ShowMessage.o \
 		main.o \
 		MainWindow.o \
 		qrc_images.o \
+		moc_Game.o \
 		moc_Loading.o \
 		moc_MainWindow.o
 DIST          = /home/hadi/Qt/6.7.0/gcc_64/mkspecs/features/spec_pre.prf \
@@ -281,8 +289,14 @@ DIST          = /home/hadi/Qt/6.7.0/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/hadi/Qt/6.7.0/gcc_64/mkspecs/features/exceptions.prf \
 		/home/hadi/Qt/6.7.0/gcc_64/mkspecs/features/yacc.prf \
 		/home/hadi/Qt/6.7.0/gcc_64/mkspecs/features/lex.prf \
-		../../../../Splendor.pro ../../Loading.h \
-		../../MainWindow.h ../../Loading.cpp \
+		../../../../Splendor.pro ../../Game.h \
+		../../Loading.h \
+		../../MainWindow.h \
+		../../Player.h \
+		../../ShowMessage.h ../../Game.cpp \
+		../../Loading.cpp \
+		../../Player.cpp \
+		../../ShowMessage.cpp \
 		../../main.cpp \
 		../../MainWindow.cpp
 QMAKE_TARGET  = Splendor
@@ -293,7 +307,7 @@ TARGET        = Splendor
 first: all
 ####### Build rules
 
-Splendor: ui_Loading.h ui_MainWindow.h $(OBJECTS)  
+Splendor: ui_Game.h ui_Loading.h ui_MainWindow.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET)  $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../../Splendor.pro /home/hadi/Qt/6.7.0/gcc_64/mkspecs/linux-g++/qmake.conf /home/hadi/Qt/6.7.0/gcc_64/mkspecs/features/spec_pre.prf \
@@ -759,9 +773,9 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../images.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /home/hadi/Qt/6.7.0/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../Loading.h ../../MainWindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../Loading.cpp ../../main.cpp ../../MainWindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../Loading.ui ../../MainWindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../../Game.h ../../Loading.h ../../MainWindow.h ../../Player.h ../../ShowMessage.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../Game.cpp ../../Loading.cpp ../../Player.cpp ../../ShowMessage.cpp ../../main.cpp ../../MainWindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../Game.ui ../../Loading.ui ../../MainWindow.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -790,10 +804,16 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_images.cpp
 qrc_images.cpp: ../../images.qrc \
 		/home/hadi/Qt/6.7.0/gcc_64/libexec/rcc \
+		../../images/jokerToken.png \
 		../../images/homeScreen.png \
 		../../images/loading2.png \
+		../../images/blackToken.jpeg \
+		../../images/blueToken.jpg \
 		../../images/level.png \
-		../../images/loading3.png
+		../../images/loading3.png \
+		../../images/whiteToken.jpg \
+		../../images/redToken.jpg \
+		../../images/greenToken.jpg
 	/home/hadi/Qt/6.7.0/gcc_64/libexec/rcc -name images ../../images.qrc -o qrc_images.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
@@ -802,9 +822,204 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /home/hadi/Qt/6.7.0/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++1z -Wall -Wextra -fPIC -dM -E -o moc_predefs.h /home/hadi/Qt/6.7.0/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_Loading.cpp moc_MainWindow.cpp
+compiler_moc_header_make_all: moc_Game.cpp moc_Loading.cpp moc_MainWindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_Loading.cpp moc_MainWindow.cpp
+	-$(DEL_FILE) moc_Game.cpp moc_Loading.cpp moc_MainWindow.cpp
+moc_Game.cpp: ../../Game.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QWidget \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qwidget.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qtguiglobal.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qglobal.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtversionchecks.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtconfiginclude.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qconfig.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtcore-config.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtconfigmacros.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtcoreexports.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qassert.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtnoop.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtypes.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtversion.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qsysinfo.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qlogging.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qflags.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcompare_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qatomic.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qyieldcpu.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qconstructormacros.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qdarwinhelpers.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qexceptionhandling.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qforeach.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qttypetraits.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfunctionpointer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmalloc.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qminmax.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qnumeric.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qoverload.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qswap.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtresource.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qttranslation.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qversiontagging.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qtgui-config.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qtguiexports.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qtwidgetsexports.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qwindowdefs.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qnamespace.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtmetamacros.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qobject.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstring.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qchar.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbytearray.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qrefcount.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qarraydata.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qpair.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qarraydatapointer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qarraydataops.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qxptype_traits.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/q20functional.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/q20memory.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbytearrayview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringfwd.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/q20type_traits.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringliteral.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringalgorithms.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qlatin1stringview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qanystringview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qutf8stringview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringtokenizer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringconverter.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringconverter_base.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qlist.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qhashfunctions.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qiterator.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringlist.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qalgorithms.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringmatcher.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcoreevent.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmetatype.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcompare.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcomparehelpers.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qdatastream.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qiodevicebase.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfloat16.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmath.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qiterable.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmetacontainer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcontainerinfo.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtaggedpointer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qscopeguard.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qobject_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbindingstorage.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmargins.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/q23utility.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qaction.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qkeysequence.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qicon.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qsize.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpixmap.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpaintdevice.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qrect.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qpoint.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qcolor.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qrgb.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qrgba64.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qshareddata.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qimage.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpixelformat.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qtransform.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpolygon.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qregion.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qline.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qvariant.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qdebug.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtextstream.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmap.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qshareddata_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qset.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qhash.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpalette.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qbrush.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qfont.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qendian.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qfontmetrics.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qfontinfo.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qcursor.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qbitmap.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qevent.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qiodevice.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qurl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qeventpoint.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qvector2d.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qvectornd.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpointingdevice.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qinputdevice.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qscreen.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QList \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QObject \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QRect \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QSize \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QSizeF \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/QTransform \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qnativeinterface.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qscreen_platform.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qguiapplication.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcoreapplication.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qelapsedtimer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qeventloop.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcoreapplication_platform.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfuture.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfutureinterface.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmutex.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtsan_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qresultstore.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfuture_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qthreadpool.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qthread.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qrunnable.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qexception.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qpromise.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qinputmethod.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qlocale.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qguiapplication_platform.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QVector \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qvector.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QMap \
+		../../Player.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QString \
+		moc_predefs.h \
+		/home/hadi/Qt/6.7.0/gcc_64/libexec/moc
+	/home/hadi/Qt/6.7.0/gcc_64/libexec/moc $(DEFINES) --include /home/hadi/Working/programing/projects/Splendor/build/Desktop-Debug/moc_predefs.h -I/home/hadi/Qt/6.7.0/gcc_64/mkspecs/linux-g++ -I/home/hadi/Working/programing/projects/Splendor -I/home/hadi/Qt/6.7.0/gcc_64/include -I/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets -I/home/hadi/Qt/6.7.0/gcc_64/include/QtGui -I/home/hadi/Qt/6.7.0/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../Game.h -o moc_Game.cpp
+
 moc_Loading.cpp: ../../Loading.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QWidget \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qwidget.h \
@@ -1189,8 +1404,19 @@ moc_MainWindow.cpp: ../../MainWindow.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QTimer \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtimer.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbasictimer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QMap \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QVector \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qvector.h \
 		../../Loading.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QWidget \
+		../../ShowMessage.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QMessageBox \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qdialog.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QString \
+		../../Player.h \
+		../../Game.h \
 		moc_predefs.h \
 		/home/hadi/Qt/6.7.0/gcc_64/libexec/moc
 	/home/hadi/Qt/6.7.0/gcc_64/libexec/moc $(DEFINES) --include /home/hadi/Working/programing/projects/Splendor/build/Desktop-Debug/moc_predefs.h -I/home/hadi/Qt/6.7.0/gcc_64/mkspecs/linux-g++ -I/home/hadi/Working/programing/projects/Splendor -I/home/hadi/Qt/6.7.0/gcc_64/include -I/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets -I/home/hadi/Qt/6.7.0/gcc_64/include/QtGui -I/home/hadi/Qt/6.7.0/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../MainWindow.h -o moc_MainWindow.cpp
@@ -1199,9 +1425,13 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_Loading.h ui_MainWindow.h
+compiler_uic_make_all: ui_Game.h ui_Loading.h ui_MainWindow.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_Loading.h ui_MainWindow.h
+	-$(DEL_FILE) ui_Game.h ui_Loading.h ui_MainWindow.h
+ui_Game.h: ../../Game.ui \
+		/home/hadi/Qt/6.7.0/gcc_64/libexec/uic
+	/home/hadi/Qt/6.7.0/gcc_64/libexec/uic ../../Game.ui -o ui_Game.h
+
 ui_Loading.h: ../../Loading.ui \
 		/home/hadi/Qt/6.7.0/gcc_64/libexec/uic
 	/home/hadi/Qt/6.7.0/gcc_64/libexec/uic ../../Loading.ui -o ui_Loading.h
@@ -1219,6 +1449,211 @@ compiler_lex_clean:
 compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
+
+Game.o: ../../Game.cpp ../../Game.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QWidget \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qwidget.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qtguiglobal.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qglobal.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtversionchecks.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtconfiginclude.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qconfig.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtcore-config.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtconfigmacros.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtcoreexports.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qassert.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtnoop.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtypes.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtversion.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qsysinfo.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qlogging.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qflags.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcompare_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qatomic.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qyieldcpu.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qconstructormacros.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qdarwinhelpers.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qexceptionhandling.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qforeach.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qttypetraits.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfunctionpointer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmalloc.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qminmax.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qnumeric.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qoverload.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qswap.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtresource.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qttranslation.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qversiontagging.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qtgui-config.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qtguiexports.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qtwidgetsexports.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qwindowdefs.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qnamespace.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtmetamacros.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qobject.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstring.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qchar.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbytearray.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qrefcount.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qarraydata.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qpair.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qarraydatapointer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qarraydataops.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qxptype_traits.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/q20functional.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/q20memory.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbytearrayview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringfwd.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/q20type_traits.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringliteral.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringalgorithms.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qlatin1stringview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qanystringview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qutf8stringview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringtokenizer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringconverter.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringconverter_base.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qlist.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qhashfunctions.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qiterator.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringlist.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qalgorithms.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringmatcher.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcoreevent.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmetatype.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcompare.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcomparehelpers.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qdatastream.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qiodevicebase.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfloat16.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmath.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qiterable.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmetacontainer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcontainerinfo.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtaggedpointer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qscopeguard.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qobject_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbindingstorage.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmargins.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/q23utility.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qaction.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qkeysequence.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qicon.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qsize.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpixmap.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpaintdevice.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qrect.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qpoint.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qcolor.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qrgb.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qrgba64.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qshareddata.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qimage.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpixelformat.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qtransform.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpolygon.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qregion.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qline.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qvariant.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qdebug.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtextstream.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmap.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qshareddata_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qset.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qhash.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpalette.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qbrush.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qfont.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qendian.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qfontmetrics.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qfontinfo.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qcursor.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qbitmap.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qevent.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qiodevice.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qurl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qeventpoint.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qvector2d.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qvectornd.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpointingdevice.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qinputdevice.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qscreen.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QList \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QObject \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QRect \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QSize \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QSizeF \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/QTransform \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qnativeinterface.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qscreen_platform.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qguiapplication.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcoreapplication.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qelapsedtimer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qeventloop.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcoreapplication_platform.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfuture.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfutureinterface.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmutex.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtsan_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qresultstore.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfuture_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qthreadpool.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qthread.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qrunnable.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qexception.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qpromise.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qinputmethod.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qlocale.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qguiapplication_platform.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QVector \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qvector.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QMap \
+		../../Player.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QString \
+		ui_Game.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QVariant \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QApplication \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qapplication.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QLabel \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qlabel.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qframe.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpicture.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qtextdocument.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QPushButton \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qpushbutton.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qabstractbutton.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Game.o ../../Game.cpp
 
 Loading.o: ../../Loading.cpp ../../Loading.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QWidget \
@@ -1409,8 +1844,286 @@ Loading.o: ../../Loading.cpp ../../Loading.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QTimer \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtimer.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbasictimer.h \
-		ui_Loading.h
+		ui_Loading.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QVariant \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QApplication \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qapplication.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QLabel \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qlabel.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qframe.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpicture.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qtextdocument.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QProgressBar \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qprogressbar.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Loading.o ../../Loading.cpp
+
+Player.o: ../../Player.cpp ../../Player.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QString \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstring.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qchar.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qglobal.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtversionchecks.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtconfiginclude.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qconfig.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtcore-config.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtconfigmacros.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtcoreexports.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qassert.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtnoop.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtypes.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtversion.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qsysinfo.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qlogging.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qflags.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcompare_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qatomic.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qyieldcpu.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qconstructormacros.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qdarwinhelpers.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qexceptionhandling.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qforeach.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qttypetraits.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfunctionpointer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmalloc.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qminmax.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qnumeric.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qoverload.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qswap.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtresource.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qttranslation.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qversiontagging.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbytearray.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qrefcount.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qnamespace.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtmetamacros.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qarraydata.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qpair.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qarraydatapointer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qarraydataops.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qxptype_traits.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/q20functional.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/q20memory.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbytearrayview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringfwd.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/q20type_traits.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringliteral.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringalgorithms.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qlatin1stringview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qanystringview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qutf8stringview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringtokenizer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringconverter.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringconverter_base.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Player.o ../../Player.cpp
+
+ShowMessage.o: ../../ShowMessage.cpp ../../ShowMessage.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QMessageBox \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qtguiglobal.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qglobal.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtversionchecks.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtconfiginclude.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qconfig.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtcore-config.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtconfigmacros.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtcoreexports.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qassert.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtnoop.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtypes.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtversion.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qsysinfo.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qlogging.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qflags.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcompare_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qatomic.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qyieldcpu.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qconstructormacros.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qdarwinhelpers.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qexceptionhandling.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qforeach.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qttypetraits.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfunctionpointer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmalloc.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qminmax.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qnumeric.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qoverload.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qswap.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtresource.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qttranslation.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qversiontagging.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qtgui-config.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qtguiexports.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qtwidgetsexports.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qdialog.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qwidget.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qwindowdefs.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qnamespace.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtmetamacros.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qobject.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstring.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qchar.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbytearray.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qrefcount.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qarraydata.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qpair.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qarraydatapointer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qarraydataops.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qxptype_traits.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/q20functional.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/q20memory.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbytearrayview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringfwd.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/q20type_traits.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringliteral.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringalgorithms.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qlatin1stringview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qanystringview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qutf8stringview.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringtokenizer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringconverter.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringconverter_base.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qlist.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qhashfunctions.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qiterator.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringlist.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qalgorithms.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qstringmatcher.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcoreevent.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmetatype.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcompare.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcomparehelpers.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qdatastream.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qiodevicebase.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfloat16.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmath.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qiterable.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmetacontainer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcontainerinfo.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtaggedpointer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qscopeguard.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qobject_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbindingstorage.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmargins.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/q23utility.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qaction.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qkeysequence.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qicon.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qsize.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpixmap.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpaintdevice.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qrect.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qpoint.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qcolor.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qrgb.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qrgba64.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qshareddata.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qimage.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpixelformat.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qtransform.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpolygon.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qregion.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qline.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qvariant.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qdebug.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtextstream.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmap.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qshareddata_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qset.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qhash.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpalette.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qbrush.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qfont.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qendian.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qfontmetrics.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qfontinfo.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qcursor.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qbitmap.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qevent.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qiodevice.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qurl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qeventpoint.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qvector2d.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qvectornd.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qpointingdevice.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qinputdevice.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qscreen.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QList \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QObject \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QRect \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QSize \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QSizeF \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/QTransform \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qnativeinterface.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qscreen_platform.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qguiapplication.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcoreapplication.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qelapsedtimer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qeventloop.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qcoreapplication_platform.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfuture.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfutureinterface.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qmutex.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtsan_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qresultstore.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qfuture_impl.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qthreadpool.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qthread.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qrunnable.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qexception.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qpromise.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qinputmethod.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qlocale.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtGui/qguiapplication_platform.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QString
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ShowMessage.o ../../ShowMessage.cpp
 
 main.o: ../../main.cpp ../../MainWindow.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QMainWindow \
@@ -1603,8 +2316,19 @@ main.o: ../../main.cpp ../../MainWindow.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QTimer \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtimer.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbasictimer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QMap \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QVector \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qvector.h \
 		../../Loading.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QWidget \
+		../../ShowMessage.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QMessageBox \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qdialog.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QString \
+		../../Player.h \
+		../../Game.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QApplication \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
@@ -1800,8 +2524,19 @@ MainWindow.o: ../../MainWindow.cpp ../../MainWindow.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QTimer \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qtimer.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qbasictimer.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QMap \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QVector \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/qvector.h \
 		../../Loading.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QWidget \
+		../../ShowMessage.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QMessageBox \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qdialog.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
+		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QString \
+		../../Player.h \
+		../../Game.h \
 		ui_MainWindow.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtCore/QVariant \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QApplication \
@@ -1843,8 +2578,6 @@ MainWindow.o: ../../MainWindow.cpp ../../MainWindow.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QMenuBar \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qmenubar.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qmenu.h \
-		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QProgressBar \
-		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qprogressbar.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/QPushButton \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qpushbutton.h \
 		/home/hadi/Qt/6.7.0/gcc_64/include/QtWidgets/qabstractbutton.h \
@@ -1855,6 +2588,9 @@ MainWindow.o: ../../MainWindow.cpp ../../MainWindow.h \
 
 qrc_images.o: qrc_images.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_images.o qrc_images.cpp
+
+moc_Game.o: moc_Game.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Game.o moc_Game.cpp
 
 moc_Loading.o: moc_Loading.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Loading.o moc_Loading.cpp

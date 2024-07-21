@@ -6,6 +6,9 @@ Loading::Loading(QWidget *parent)
     , ui(new Ui::Loading)
 {
     ui->setupUi(this);
+
+    setFixedSize(554, 272);
+
     timerForLoading = new QTimer();
     connect(timerForLoading, &QTimer::timeout, this, &Loading::UpdateLoadingPB);
     timerForLoading->start(500);

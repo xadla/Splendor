@@ -3,7 +3,13 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include <QMap>
+#include <QVector>
+
 #include "Loading.h"
+#include "ShowMessage.h"
+#include "Player.h"
+#include "Game.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -30,9 +36,15 @@ private:
 
     Loading loadingPage;
 
+    ShowMessage message;
+
+    Game game;
+
 
 signals:
     void showHomeScreen();
 
+private slots:
+    void on_start_btn_clicked();
 };
 #endif // MAINWINDOW_H
