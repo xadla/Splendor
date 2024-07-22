@@ -1838,6 +1838,434 @@ padding: 5px;</string>
     <string>1</string>
    </property>
   </widget>
+  <widget class="QLabel" name="tokenRecive1">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>0</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sahadeva</family>
+     <pointsize>14</pointsize>
+     <italic>true</italic>
+    </font>
+   </property>
+   <property name="text">
+    <string>1X red</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="tokenRecive2">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>30</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sahadeva</family>
+     <pointsize>14</pointsize>
+     <italic>true</italic>
+    </font>
+   </property>
+   <property name="text">
+    <string>1X blue</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="tokenRecive3">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>60</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sahadeva</family>
+     <pointsize>14</pointsize>
+     <italic>true</italic>
+    </font>
+   </property>
+   <property name="text">
+    <string>1X green</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="reserveBTN">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>710</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>TenaliRamakrishna</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border: 2px solid black;
+border-radius: 20px;
+border-style: outset;
+padding: 5px;</string>
+   </property>
+   <property name="text">
+    <string>Reserve</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="buyButton">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>710</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>TenaliRamakrishna</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border: 2px solid gray;
+border-radius: 20px;
+border-style: outset;
+padding: 5px;</string>
+   </property>
+   <property name="text">
+    <string>Buy</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="cardChoosed">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>720</y>
+     <width>251</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>TenaliRamakrishna</family>
+     <pointsize>16</pointsize>
+     <italic>true</italic>
+    </font>
+   </property>
+   <property name="text">
+    <string>Row 1 Column 3 Choosed</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="tokenClear3">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>60</y>
+     <width>21</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border:none;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset theme="application-exit"/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="tokenClear2">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>35</y>
+     <width>21</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border:none;
+
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset theme="application-exit"/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="tokenClear1">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>10</y>
+     <width>21</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border:none;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset theme="application-exit"/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pickTokens">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>90</y>
+     <width>61</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>TenaliRamakrishna</family>
+     <pointsize>17</pointsize>
+     <italic>false</italic>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border: 2px solid rgb(6, 171, 174);
+border-radius: 20px;
+border-style: outset;
+padding: 5px;</string>
+   </property>
+   <property name="text">
+    <string>Pick</string>
+   </property>
+  </widget>
+  <widget class="QFrame" name="playerOne">
+   <property name="geometry">
+    <rect>
+     <x>1130</x>
+     <y>10</y>
+     <width>231</width>
+     <height>351</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QLabel" name="nameOneLBL">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>51</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Name:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="nameForOne">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>8</y>
+      <width>161</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Hadi</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="redTokenOne">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>280</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Red Token:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="whiteTokenOne">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>310</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>White Token:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="blueTokenOne">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>250</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Blue Token:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="blackTokenOne">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>220</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Black Token:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="greenTokenOne">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>190</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Green Token:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="scoreOne">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>41</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Score:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="greenCardOne">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Green Card:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="blackCardOne">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Black Card:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="blueCardOne">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>110</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Blue Card:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="redCardOne">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>140</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Red Card:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="whiteCardOne">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>166</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>White Card:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>55</x>
+      <y>25</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>15</string>
+    </property>
+   </widget>
+  </widget>
  </widget>
  <resources/>
  <connections/>

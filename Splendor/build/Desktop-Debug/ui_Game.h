@@ -10,6 +10,7 @@
 #define UI_GAME_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
@@ -69,6 +70,15 @@ public:
     QLabel *scoreThree2;
     QLabel *scoreThree3;
     QLabel *scoreThree4;
+    QLabel *tokenRecive1;
+    QLabel *tokenRecive2;
+    QLabel *tokenRecive3;
+    QPushButton *reserveBTN;
+    QPushButton *buyButton;
+    QLabel *cardChoosed;
+    QPushButton *pushButton;
+    QPushButton *pushButton_2;
+    QPushButton *pushButton_3;
 
     void setupUi(QWidget *Game)
     {
@@ -530,6 +540,67 @@ public:
         scoreThree4->setObjectName("scoreThree4");
         scoreThree4->setGeometry(QRect(470, 510, 16, 41));
         scoreThree4->setFont(font);
+        tokenRecive1 = new QLabel(Game);
+        tokenRecive1->setObjectName("tokenRecive1");
+        tokenRecive1->setGeometry(QRect(490, 10, 101, 31));
+        QFont font1;
+        font1.setFamilies({QString::fromUtf8("Sahadeva")});
+        font1.setPointSize(14);
+        font1.setItalic(true);
+        tokenRecive1->setFont(font1);
+        tokenRecive2 = new QLabel(Game);
+        tokenRecive2->setObjectName("tokenRecive2");
+        tokenRecive2->setGeometry(QRect(490, 40, 101, 31));
+        tokenRecive2->setFont(font1);
+        tokenRecive3 = new QLabel(Game);
+        tokenRecive3->setObjectName("tokenRecive3");
+        tokenRecive3->setGeometry(QRect(490, 70, 101, 31));
+        tokenRecive3->setFont(font1);
+        reserveBTN = new QPushButton(Game);
+        reserveBTN->setObjectName("reserveBTN");
+        reserveBTN->setGeometry(QRect(330, 710, 101, 41));
+        QFont font2;
+        font2.setFamilies({QString::fromUtf8("TenaliRamakrishna")});
+        font2.setPointSize(16);
+        reserveBTN->setFont(font2);
+        reserveBTN->setStyleSheet(QString::fromUtf8("border: 2px solid black;\n"
+"border-radius: 20px;\n"
+"border-style: outset;\n"
+"padding: 5px;"));
+        buyButton = new QPushButton(Game);
+        buyButton->setObjectName("buyButton");
+        buyButton->setGeometry(QRect(480, 710, 101, 41));
+        buyButton->setFont(font2);
+        buyButton->setStyleSheet(QString::fromUtf8("border: 2px solid gray;\n"
+"border-radius: 20px;\n"
+"border-style: outset;\n"
+"padding: 5px;"));
+        cardChoosed = new QLabel(Game);
+        cardChoosed->setObjectName("cardChoosed");
+        cardChoosed->setGeometry(QRect(40, 720, 251, 31));
+        QFont font3;
+        font3.setFamilies({QString::fromUtf8("TenaliRamakrishna")});
+        font3.setPointSize(16);
+        font3.setItalic(true);
+        cardChoosed->setFont(font3);
+        pushButton = new QPushButton(Game);
+        pushButton->setObjectName("pushButton");
+        pushButton->setGeometry(QRect(600, 80, 21, 21));
+        pushButton->setStyleSheet(QString::fromUtf8("border:none;"));
+        QIcon icon(QIcon::fromTheme(QString::fromUtf8("application-exit")));
+        pushButton->setIcon(icon);
+        pushButton_2 = new QPushButton(Game);
+        pushButton_2->setObjectName("pushButton_2");
+        pushButton_2->setGeometry(QRect(600, 50, 21, 21));
+        pushButton_2->setStyleSheet(QString::fromUtf8("border:none;\n"
+"\n"
+""));
+        pushButton_2->setIcon(icon);
+        pushButton_3 = new QPushButton(Game);
+        pushButton_3->setObjectName("pushButton_3");
+        pushButton_3->setGeometry(QRect(600, 20, 21, 21));
+        pushButton_3->setStyleSheet(QString::fromUtf8("border:none;"));
+        pushButton_3->setIcon(icon);
 
         retranslateUi(Game);
 
@@ -588,6 +659,15 @@ public:
         scoreThree2->setText(QCoreApplication::translate("Game", "1", nullptr));
         scoreThree3->setText(QCoreApplication::translate("Game", "1", nullptr));
         scoreThree4->setText(QCoreApplication::translate("Game", "1", nullptr));
+        tokenRecive1->setText(QCoreApplication::translate("Game", "1X red", nullptr));
+        tokenRecive2->setText(QCoreApplication::translate("Game", "1X blue", nullptr));
+        tokenRecive3->setText(QCoreApplication::translate("Game", "1X green", nullptr));
+        reserveBTN->setText(QCoreApplication::translate("Game", "Reserve", nullptr));
+        buyButton->setText(QCoreApplication::translate("Game", "Buy", nullptr));
+        cardChoosed->setText(QCoreApplication::translate("Game", "Row 1 Column 3 Choosed", nullptr));
+        pushButton->setText(QString());
+        pushButton_2->setText(QString());
+        pushButton_3->setText(QString());
     } // retranslateUi
 
 };
