@@ -1,0 +1,106 @@
+#include "HandleServer.h"
+
+HandleServer::HandleServer(QObject *parent)
+    : QObject{parent}
+{}
+
+void HandleServer::check_registration(const QString &username, const QString &email)
+{
+    QFile file("../../users.json");
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "Could not open file for reading:" << file.errorString();
+        return;
+    }
+
+    QByteArray jsonData = file.readAll();
+    file.close();
+
+    QJsonDocument jsonDoc(QJsonDocument::fromJson(jsonData));
+    if (jsonDoc.isNull()) {
+        qDebug() << "Failed to create JSON doc.";
+        return;
+    }
+
+    if (jsonDoc.isArray()) {
+        QJsonArray jsonArray = jsonDoc.array();
+        for (const QJsonValue &value : jsonArray) {
+            QJsonObject jsonObject = value.toObject();
+            QJsonObject userObject = jsonObject["user"].toObject();
+
+            if (userObject["username"] == username){
+                emit send_to_server("Username duplicate");
+                return;
+            } else if (userObject["email"] == email){
+                emit send_to_server("Email duplicate");
+                return;
+            } else{
+                emit send_to_server("All Checked");
+                return;
+            }
+
+        }
+    } else if (jsonDoc.isObject()) {
+        QJsonObject jsonObject = jsonDoc.object();
+        QJsonArray usersArray = jsonObject["users"].toArray();
+
+        for (const QJsonValue &value : usersArray) {
+            QJsonObject userObject = value.toObject();
+
+            if (userObject["username"] == username){
+                emit send_to_server("Username duplicate");
+                return;
+            } else if (userObject["email"] == email){
+                emit send_to_server("Email duplicate");
+                return;
+            } else{
+                emit send_to_server("All Checked");
+                return;
+            }
+
+        }
+    }
+}
+
+void HandleServer::save_data_registration(const QStringList &data)
+{
+
+    QJsonObject userObject;
+    userObject["first_name"] = data[1];
+    userObject["last_name"] = data[2];
+    userObject["username"] = data[3];
+    userObject["email"] = data[4];
+    userObject["password"] = data[5];
+
+    QFile file("../../users.json");
+
+    if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
+        qDebug() << "Could not open the file for reading and writing.";
+        return;
+    }
+
+    QByteArray fileData = file.readAll();
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(fileData);
+    QJsonArray usersArray;
+
+    if (jsonDoc.isObject()) {
+        QJsonObject jsonObj = jsonDoc.object();
+        if (jsonObj.contains("users")) {
+            usersArray = jsonObj["users"].toArray();
+        }
+    } else {
+        qDebug() << "JSON format is invalid.";
+        return;
+    }
+
+    usersArray.append(userObject);
+
+    QJsonObject updatedJsonObj;
+    updatedJsonObj["users"] = usersArray;
+
+    QJsonDocument updatedJsonDoc(updatedJsonObj);
+    file.resize(0);
+    file.write(updatedJsonDoc.toJson());
+    file.close();
+
+    qDebug() << "User data saved successfully.";
+}

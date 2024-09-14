@@ -1,0 +1,18 @@
+{
+    "users": [
+        {
+            "email": "hadinjr80@gmail.com",
+            "first_name": "Mohammadhadi",
+            "last_name": "Najari",
+            "password": "HashedPassword",
+            "username": "Hadinjr"
+        },
+        {
+            "email": "Abolfazl@gmail.com",
+            "first_name": "Abolfazl",
+            "last_name": "Monsef",
+            "password": "7d16d757d53c1bfaa74ddc4a1ec378b8",
+            "username": "Abolfazl1234"
+        }
+    ]
+}
