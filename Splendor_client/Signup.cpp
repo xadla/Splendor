@@ -42,13 +42,14 @@ void Signup::register_account()
         QString result = "Register " + ui->first_name_le->text() + " " + ui->last_name_le->text() + " ";
         result += ui->username_le->text() + " " + ui->email_le->text() + " " + QString(hashedPassword);
         emit send_message(result);
+        emit back_to_home(ui->username_le->text());
         return;
     }
 }
 
 void Signup::on_pushButton_clicked()
 {
-    emit back_to_home();
+    emit back_to_home("");
 }
 
 void Signup::on_register_btn_clicked()

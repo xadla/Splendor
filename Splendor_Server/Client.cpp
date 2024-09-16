@@ -29,6 +29,15 @@ void Client::process_handle_server(const QString &mes)
     } else if (listMes[0] == "All") {
         send_message("Registration All Completed");
         return;
+    } else if (listMes[0] == "Login"){
+        send_message("Login Successfull");
+        return;
+    } else if (listMes[0] == "Password") {
+        send_message("Login Password Wrong");
+        return;
+    } else if (listMes[0] == "User"){
+        send_message("Login User not found");
+        return;
     }
 }
 

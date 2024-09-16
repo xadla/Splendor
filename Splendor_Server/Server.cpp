@@ -13,6 +13,7 @@ Server::Server(QObject *parent)
 
     connect(&process, &Process::check_registration, &handle, &HandleServer::check_registration);
     connect(&process, &Process::save_data_registeration, &handle, &HandleServer::save_data_registration);
+    connect(&process, &Process::check_login, &handle, &HandleServer::check_login);
 }
 
 Server::~Server()

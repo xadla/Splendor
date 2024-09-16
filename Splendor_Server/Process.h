@@ -16,6 +16,7 @@ public:
 signals:
     void check_registration(const QString &username, const QString &email);
     void save_data_registeration(const QStringList& data);
+    void check_login(const QString &username, const QString &password);
 
 };
 

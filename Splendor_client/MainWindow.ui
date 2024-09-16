@@ -2263,6 +2263,25 @@ padding: 6px;</string>
      <string notr="true">border-image: url(:/images/homeScreen.png);</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="logout_btn">
+    <property name="geometry">
+     <rect>
+      <x>1180</x>
+      <y>40</y>
+      <width>181</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: none;
+border-radius: 5px;
+color: #fff;
+border: 1px solid #000;</string>
+    </property>
+    <property name="text">
+     <string>Logout</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

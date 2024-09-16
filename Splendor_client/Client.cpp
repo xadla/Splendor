@@ -3,6 +3,7 @@
 Client::Client(QObject *parent): QObject(parent), socket(new QTcpSocket(this)) {
     connect(socket, &QTcpSocket::readyRead, this, &Client::on_ready_read);
     this->connect_to_host(QHostAddress::Any, 8080);
+
 }
 
 void Client::send_message(const QString &message)
@@ -16,7 +17,7 @@ void Client::send_message(const QString &message)
 
 void Client::connect_to_host(const QHostAddress &address, qint16 port)
 {
-    if (socket->state() == QAbstractSocket::UnconnectedState){
+    if (socket->state() == QAbstractSocket::UnconnectedState) {
         socket->connectToHost(address, port);
     } else {
         qDebug() << "Socket already connected or is in the process of connecting!";
@@ -33,6 +34,8 @@ void Client::on_ready_read()
     if (listData[0] == "Registration"){
         register_process(listData);
         return;
+    } else if (listData[0] == "Login"){
+        login_process(listData);
     }
 
 }
@@ -47,6 +50,20 @@ void Client::register_process(const QStringList& mes)
         return;
     } else {
         emit ckeck_passed_register();
+        return;
+    }
+}
+
+void Client::login_process(const QStringList &mes)
+{
+    if (mes[1] == "Successfull") {
+        emit login_successfull();
+        return;
+    } else if (mes[1] == "Password") {
+        emit password_wrong_login();
+        return;
+    } else if (mes[1] == "User") {
+        emit user_not_found_login();
         return;
     }
 }

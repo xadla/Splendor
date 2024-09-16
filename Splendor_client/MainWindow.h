@@ -11,6 +11,7 @@
 #include "Game.h"
 #include "Signup.h"
 #include "Client.h"
+#include "Login.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -39,7 +40,10 @@ private:
     ShowMessage message;
     Game game;
     Signup signup;
+    Login login;
     Client *client;
+
+    QString _username;
 
 signals:
     void showHomeScreen();
@@ -47,7 +51,11 @@ signals:
 private slots:
     void on_start_btn_clicked();
     void on_signup_bt_clicked();
-    void signup_back();
+    void signup_back(const QString &situation);
+    void login_back(const QString &situation);
     void send_message(const QString& message);
+    void on_signin_bt_clicked();
+
+    void on_logout_btn_clicked();
 };
 #endif // MAINWINDOW_H

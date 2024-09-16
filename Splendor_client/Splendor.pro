@@ -12,6 +12,7 @@ SOURCES += \
     Client.cpp \
     Game.cpp \
     Loading.cpp \
+    Login.cpp \
     Player.cpp \
     ShowMessage.cpp \
     Signup.cpp \
@@ -22,6 +23,7 @@ HEADERS += \
     Client.h \
     Game.h \
     Loading.h \
+    Login.h \
     MainWindow.h \
     Player.h \
     ShowMessage.h \
@@ -30,6 +32,7 @@ HEADERS += \
 FORMS += \
     Game.ui \
     Loading.ui \
+    Login.ui \
     MainWindow.ui \
     Signup.ui
 

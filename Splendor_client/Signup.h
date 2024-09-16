@@ -26,7 +26,7 @@ private slots:
     void on_register_btn_clicked();
 
 signals:
-    void back_to_home();
+    void back_to_home(const QString& situation);
     void send_message(const QString& message);
 
 private:

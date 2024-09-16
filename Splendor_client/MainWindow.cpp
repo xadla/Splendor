@@ -10,12 +10,26 @@ MainWindow::MainWindow(QWidget *parent)
     QTimer::singleShot(0, this, &MainWindow::showLoading);
     client = new Client(this);
 
+    // hide logout button
+    ui->logout_btn->setVisible(false);
+
     connect(&loadingPage, &Loading::showHomeScreen, this, &MainWindow::HomeScreen);
+
+    // same button in signup and signin
     connect(&signup, &Signup::back_to_home, this, &MainWindow::signup_back);
+    connect(&login, &Login::back_to_main, this, &MainWindow::login_back);
     connect(&signup, &Signup::send_message, this, &MainWindow::send_message);
+    connect(&login, &Login::send_message, this, &MainWindow::send_message);
+
+    // register connections
     connect(client, &Client::username_error_register, &signup, &Signup::show_error_message);
     connect(client, &Client::email_error_register, &signup, &Signup::show_error_message);
     connect(client, &Client::ckeck_passed_register, &signup, &Signup::register_account);
+
+    // login connections
+    connect(client, &Client::login_successfull, &login, &Login::login_success);
+    connect(client, &Client::password_wrong_login, &login, &Login::password_wrong);
+    connect(client, &Client::user_not_found_login, &login, &Login::username_not_found);
 }
 
 MainWindow::~MainWindow()
@@ -76,9 +90,32 @@ void MainWindow::on_signup_bt_clicked()
     this->signup.show();
 }
 
-void MainWindow::signup_back()
+void MainWindow::signup_back(const QString &situation)
 {
+    if (!situation.isEmpty()){
+        ui->signin_bt->setVisible(false);
+        ui->signup_bt->setVisible(false);
+        ui->logout_btn->setVisible(true);
+        ui->name_le->setText(situation);
+        ui->name_le->setDisabled(true);
+    }
+
     signup.hide();
+    this->show();
+
+}
+
+void MainWindow::login_back(const QString &situation)
+{
+    if (!situation.isEmpty()){
+        ui->signin_bt->setVisible(false);
+        ui->signup_bt->setVisible(false);
+        ui->logout_btn->setVisible(true);
+        ui->name_le->setText(situation);
+        ui->name_le->setDisabled(true);
+    }
+
+    login.hide();
     this->show();
 }
 
@@ -87,3 +124,17 @@ void MainWindow::send_message(const QString& message)
     client->send_message(message);
 }
 
+void MainWindow::on_signin_bt_clicked()
+{
+    this->hide();
+    login.show();
+}
+
+
+void MainWindow::on_logout_btn_clicked()
+{
+    ui->logout_btn->setVisible(false);
+    ui->signin_bt->setVisible(true);
+    ui->signup_bt->setVisible(true);
+    ui->name_le->setDisabled(false);
+}

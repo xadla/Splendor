@@ -13,6 +13,69 @@
             "last_name": "Monsef",
             "password": "7d16d757d53c1bfaa74ddc4a1ec378b8",
             "username": "Abolfazl1234"
+        },
+        {
+            "email": "Matin@gmail.com",
+            "first_name": "Matin",
+            "last_name": "Shiranizadeh",
+            "password": "521a11a0b723b2043756cc090d57c4c1",
+            "username": "Matin141"
+        },
+        {
+            "email": "Reza@gmail.com",
+            "first_name": "Reza",
+            "last_name": "Kazemi",
+            "password": "ed2b1f468c5f915f3f1cf75d7068baae",
+            "username": "Reza1231"
+        },
+        {
+            "email": "af@gmail.com",
+            "first_name": "adf",
+            "last_name": "adf",
+            "password": "ed2b1f468c5f915f3f1cf75d7068baae",
+            "username": "sdaf"
+        },
+        {
+            "email": "Javad@gmail.com",
+            "first_name": "Javad",
+            "last_name": "Najari",
+            "password": "ed2b1f468c5f915f3f1cf75d7068baae",
+            "username": "Javad1"
+        },
+        {
+            "email": "hadi@gmail.com",
+            "first_name": "Reza",
+            "last_name": "Kazemi",
+            "password": "410cd169e87b56cd2e6b91ab66594616",
+            "username": "Reza123"
+        },
+        {
+            "email": "test@gmail.com",
+            "first_name": "test",
+            "last_name": "user",
+            "password": "16d7a4fca7442dda3ad93c9a726597e4",
+            "username": "test"
+        },
+        {
+            "email": "test2@gmail.com",
+            "first_name": "test",
+            "last_name": "testUser",
+            "password": "16d7a4fca7442dda3ad93c9a726597e4",
+            "username": "test2"
+        },
+        {
+            "email": "test3@gmail.com",
+            "first_name": "test3",
+            "last_name": "user",
+            "password": "16d7a4fca7442dda3ad93c9a726597e4",
+            "username": "test3"
+        },
+        {
+            "email": "test4@gmail.com",
+            "first_name": "test4",
+            "last_name": "user",
+            "password": "16d7a4fca7442dda3ad93c9a726597e4",
+            "username": "test4"
         }
     ]
 }
