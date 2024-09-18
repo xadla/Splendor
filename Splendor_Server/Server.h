@@ -17,6 +17,7 @@ class Server : public QObject
 public:
     explicit Server(QObject *parent = nullptr);
     ~Server();
+    int Ids;
 
 private:
     QTcpServer _server;
@@ -26,6 +27,8 @@ private:
 
     Process process;
     HandleServer handle;
+
+    void send_specific_answer(QString mes, Client* client);
 
 signals:
 };

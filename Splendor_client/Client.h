@@ -15,6 +15,7 @@ class Client : public QObject
 public:
     Client(QObject* parent = nullptr);
     void send_message(const QString &message);
+    void connect_to_host(const QHostAddress &address, qint16 port);
 
 signals:
     void username_error_register(const QString& e_text);
@@ -28,10 +29,10 @@ signals:
 
 private slots:
     void on_ready_read();
+    void connected_signal();
 
 private:
     QTcpSocket *socket;
-    void connect_to_host(const QHostAddress &address, qint16 port);
     void register_process(const QStringList& mes);
     void login_process(const QStringList& mes);
 };

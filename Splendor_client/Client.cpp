@@ -1,9 +1,9 @@
 #include "Client.h"
 
 Client::Client(QObject *parent): QObject(parent), socket(new QTcpSocket(this)) {
+    connect(socket, &QTcpSocket::connected, this, &Client::connected_signal);
     connect(socket, &QTcpSocket::readyRead, this, &Client::on_ready_read);
     this->connect_to_host(QHostAddress::Any, 8080);
-
 }
 
 void Client::send_message(const QString &message)
@@ -38,6 +38,15 @@ void Client::on_ready_read()
         login_process(listData);
     }
 
+}
+
+void Client::connected_signal()
+{
+    if (socket->state() == QAbstractSocket::UnconnectedState) {
+        return;
+    } else {
+        emit connected();
+    }
 }
 
 void Client::register_process(const QStringList& mes)

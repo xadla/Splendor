@@ -11,6 +11,8 @@ Server::Server(QObject *parent)
         qDebug() << "Server started...";
     }
 
+    Ids = 1;
+
     connect(&process, &Process::check_registration, &handle, &HandleServer::check_registration);
     connect(&process, &Process::save_data_registeration, &handle, &HandleServer::save_data_registration);
     connect(&process, &Process::check_login, &handle, &HandleServer::check_login);
@@ -23,14 +25,26 @@ Server::~Server()
     }
 }
 
-void Server::on_client_connecting(){
-    qDebug() << "a Client connected to server";
+void Server::on_client_connecting() {
+    qDebug() << "A Client connected to server.";
     auto socket = _server.nextPendingConnection();
-    Client* client = new Client();
-    client->set_socket(socket);
+    Client* client = new Client(socket, Ids++);
+    _socketsList.append(client);
+
     connect(socket, &QTcpSocket::readyRead, client, &Client::data_ready_read);
     connect(client, &Client::send_data_to_server, &process, &Process::message_process);
+    connect(client, &Client::send_to_this_client, this, &Server::send_specific_answer);
     connect(&handle, &HandleServer::send_to_server, client, &Client::process_handle_server);
-    _socketsList.append(client);
-    socket->write("Well come to this server");
+
+    socket->write("Welcome to this server");
+}
+
+void Server::send_specific_answer(QString mes, Client *client) {
+    qDebug() << "Attempting to send message to client ID:" << client->get_id() << "Message:" << mes;
+    if (client) {
+        qDebug() << "Sending message to client ID:" << client->get_id();
+        client->send_message(mes);
+    } else {
+        qDebug() << "Client not found!";
+    }
 }

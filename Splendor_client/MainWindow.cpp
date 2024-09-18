@@ -5,15 +5,19 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    client = new Client(this);
+    loadingPage = new Loading(client);
+
+    connect(client, &Client::connected, loadingPage, &Loading::client_connected);
+
     ui->setupUi(this);
     setFixedSize(1366, 768);
     QTimer::singleShot(0, this, &MainWindow::showLoading);
-    client = new Client(this);
 
     // hide logout button
     ui->logout_btn->setVisible(false);
 
-    connect(&loadingPage, &Loading::showHomeScreen, this, &MainWindow::HomeScreen);
+    connect(loadingPage, &Loading::showHomeScreen, this, &MainWindow::HomeScreen);
 
     // same button in signup and signin
     connect(&signup, &Signup::back_to_home, this, &MainWindow::signup_back);
@@ -41,12 +45,12 @@ MainWindow::~MainWindow()
 void MainWindow::showLoading()
 {
     this->hide();
-    loadingPage.show();
+    loadingPage->show();
 }
 
 void MainWindow::HomeScreen()
 {
-    loadingPage.hide();
+    loadingPage->hide();
     this->show();
 }
 

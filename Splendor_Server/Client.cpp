@@ -1,12 +1,10 @@
 #include "Client.h"
 
-Client::Client(QObject *parent)
+Client::Client(QTcpSocket *socket, int id, QObject *parent)
     : QObject{parent}
-{}
-
-void Client::set_socket(QTcpSocket *socket)
 {
     _socket = socket;
+    _id = id;
 }
 
 void Client::data_ready_read()
@@ -21,24 +19,29 @@ void Client::process_handle_server(const QString &mes)
 {
     QStringList listMes = mes.split(" ");
     if (listMes[0] == "Username"){
-        send_message("Registration Username duplicate");
+        emit send_to_this_client("Registration Username duplicate", this);
         return;
     } else if (listMes[0] == "Email") {
-        send_message("Registration Email duplicate");
+        emit send_to_this_client("Registration Email duplicate", this);
         return;
     } else if (listMes[0] == "All") {
-        send_message("Registration All Completed");
+        emit send_to_this_client("Registration All Completed", this);
         return;
     } else if (listMes[0] == "Login"){
-        send_message("Login Successfull");
+        emit send_to_this_client("Login Successfull", this);
         return;
     } else if (listMes[0] == "Password") {
-        send_message("Login Password Wrong");
+        emit send_to_this_client("Login Password Wrong", this);
         return;
     } else if (listMes[0] == "User"){
-        send_message("Login User not found");
+        emit send_to_this_client("Login User not found", this);
         return;
     }
+}
+
+int Client::get_id()
+{
+    return _id;
 }
 
 void Client::send_message(const QString &message) {

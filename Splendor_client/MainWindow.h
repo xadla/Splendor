@@ -36,7 +36,7 @@ private:
 
     void HomeScreen();
 
-    Loading loadingPage;
+    Loading* loadingPage;
     ShowMessage message;
     Game game;
     Signup signup;
