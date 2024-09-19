@@ -8,6 +8,8 @@ CONFIG += c++17 cmdline
 
 SOURCES += \
         Client.cpp \
+        Game.cpp \
+        GameManager.cpp \
         HandleServer.cpp \
         Process.cpp \
         Server.cpp \
@@ -20,6 +22,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     Client.h \
+    Game.h \
+    GameManager.h \
     HandleServer.h \
     Process.h \
     Server.h

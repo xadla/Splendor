@@ -7,9 +7,8 @@
 #include <QList>
 #include <QByteArray>
 
-#include "Process.h"
 #include "Client.h"
-#include "HandleServer.h"
+#include "GameManager.h"
 
 class Server : public QObject
 {
@@ -17,20 +16,18 @@ class Server : public QObject
 public:
     explicit Server(QObject *parent = nullptr);
     ~Server();
-    int Ids;
 
 private:
     QTcpServer _server;
     bool _isStarted;
+
+    // client
     QList<Client *> _socketsList;
     void on_client_connecting();
 
-    Process process;
-    HandleServer handle;
+    // game
+    GameManager gameManager;
 
-    void send_specific_answer(QString mes, Client* client);
-
-signals:
 };
 
 #endif // SERVER_H

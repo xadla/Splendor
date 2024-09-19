@@ -2250,7 +2250,7 @@ padding: 6px;</string>
      </item>
     </layout>
    </widget>
-   <widget class="QListView" name="serverList">
+   <widget class="QListView" name="games_server">
     <property name="geometry">
      <rect>
       <x>30</x>
