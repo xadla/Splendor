@@ -531,12 +531,29 @@ padding: 6px;
     <property name="geometry">
      <rect>
       <x>1070</x>
-      <y>140</y>
+      <y>130</y>
       <width>291</width>
-      <height>571</height>
+      <height>581</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="startLayout">
+     <item>
+      <widget class="QPushButton" name="create_game_btn">
+       <property name="styleSheet">
+        <string notr="true">border:none;
+background-color: rgb(220, 138, 221);
+border-style: outset;
+border-width: 2px;
+border-radius: 10px;
+border-color: beige;
+padding: 6px;
+color: rgb(124, 105, 12);</string>
+       </property>
+       <property name="text">
+        <string>Create Game</string>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QListView" name="historyList">
        <property name="font">
@@ -2250,19 +2267,6 @@ padding: 6px;</string>
      </item>
     </layout>
    </widget>
-   <widget class="QListView" name="games_server">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>100</y>
-      <width>1031</width>
-      <height>611</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-image: url(:/images/homeScreen.png);</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="logout_btn">
     <property name="geometry">
      <rect>
@@ -2280,6 +2284,51 @@ border: 1px solid #000;</string>
     </property>
     <property name="text">
      <string>Logout</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="disconnect_btn">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>90</y>
+      <width>89</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:5px;
+border: 2px solid #fff;
+background-color:none;
+color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>Disconnect</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="message_le">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>670</y>
+      <width>1011</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>Type Something...</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="messages_list">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>110</y>
+      <width>1011</width>
+      <height>551</height>
+     </rect>
     </property>
    </widget>
   </widget>

@@ -18,6 +18,7 @@ signals:
     void save_data_registeration(const QStringList& data);
     void check_login(const QString &username, const QString &password);
     void create_game();
+    void join_game(const QString &host_name);
 
 };
 

@@ -19,6 +19,8 @@ void Process::message_process(const QString &message)
         return;
     } else if (listData[0] == "Create") {
         emit create_game();
+    } else if (listData[0] == "Join") {
+        emit join_game(listData[1]);
     }
 
 }

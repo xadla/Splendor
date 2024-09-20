@@ -13,6 +13,8 @@ public:
     void add_player(Client* player);
     void add_bot();
 
+    QString get_host_username();
+
 private:
     int _id;
     Client* _host;

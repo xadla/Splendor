@@ -34,12 +34,10 @@ void HandleServer::check_registration(const QString &username, const QString &em
             } else if (userObject["email"] == email){
                 emit send_to_server("Email duplicate");
                 return;
-            } else{
-                emit send_to_server("All Checked");
-                return;
             }
-
         }
+        emit send_to_server("All Checked " + username);
+        return;
     }
 }
 
@@ -113,7 +111,7 @@ void HandleServer::check_login(const QString &username, const QString &password)
 
             if (userObject["username"] == username){
                 if (userObject["password"] == password) {
-                    emit send_to_server("Login");
+                    emit send_to_server("Login " + username);
                     return;
                 } else{
                     emit send_to_server("Password wrong");

@@ -27,6 +27,8 @@ private:
 
     // game
     GameManager gameManager;
+    void add_player_to_host(Client* player);
+    void host_created(Client *host);
 
 };
 

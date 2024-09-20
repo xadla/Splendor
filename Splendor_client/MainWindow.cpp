@@ -14,8 +14,9 @@ MainWindow::MainWindow(QWidget *parent)
     setFixedSize(1366, 768);
     QTimer::singleShot(0, this, &MainWindow::showLoading);
 
-    // hide logout button
+    // hide buttons
     ui->logout_btn->setVisible(false);
+    ui->disconnect_btn->setVisible(false);
 
     connect(loadingPage, &Loading::showHomeScreen, this, &MainWindow::HomeScreen);
 
@@ -34,6 +35,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(client, &Client::login_successfull, &login, &Login::login_success);
     connect(client, &Client::password_wrong_login, &login, &Login::password_wrong);
     connect(client, &Client::user_not_found_login, &login, &Login::username_not_found);
+
+    // game connections
+    connect(client, &Client::host_create_successfull, this, &MainWindow::show_hosting);
 }
 
 MainWindow::~MainWindow()
@@ -141,4 +145,16 @@ void MainWindow::on_logout_btn_clicked()
     ui->signin_bt->setVisible(true);
     ui->signup_bt->setVisible(true);
     ui->name_le->setDisabled(false);
+}
+
+void MainWindow::on_create_game_btn_clicked()
+{
+    client->send_message("Create Host");
+}
+
+void MainWindow::show_hosting()
+{
+    ui->create_game_btn->setVisible(false);
+    ui->disconnect_btn->setVisible(true);
+    ui->message_le->setEnabled(true);
 }

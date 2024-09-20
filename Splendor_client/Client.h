@@ -26,6 +26,7 @@ signals:
     void user_not_found_login();
     void connected();
     void connectionError(const QString &errorString);
+    void host_create_successfull();
 
 private slots:
     void on_ready_read();
@@ -35,6 +36,7 @@ private:
     QTcpSocket *socket;
     void register_process(const QStringList& mes);
     void login_process(const QStringList& mes);
+    void game_process(const QStringList& mes);
 };
 
 #endif // CLIENT_H

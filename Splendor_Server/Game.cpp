@@ -27,3 +27,8 @@ void Game::add_bot()
     else
         qDebug() << "Game is full";
 }
+
+QString Game::get_host_username()
+{
+    return _host->get_useranme();
+}

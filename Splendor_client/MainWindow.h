@@ -57,5 +57,8 @@ private slots:
     void on_signin_bt_clicked();
 
     void on_logout_btn_clicked();
+    void on_create_game_btn_clicked();
+
+    void show_hosting();
 };
 #endif // MAINWINDOW_H

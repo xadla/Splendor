@@ -17,6 +17,12 @@ Client::Client(QTcpSocket *socket, QObject *parent)
 
     // game connections
     connect(&process, &Process::create_game, this, &Client::create_game);
+    connect(&process, &Process::join_game, this, &Client::join_game);
+}
+
+QString Client::get_useranme()
+{
+    return _username;
 }
 
 void Client::data_ready_read()
@@ -37,9 +43,11 @@ void Client::process_handle_server(const QString &mes)
         send_message("Registration Email duplicate");
         return;
     } else if (listMes[0] == "All") {
+        _username = listMes[2];
         send_message("Registration All Completed");
         return;
     } else if (listMes[0] == "Login"){
+        _username = listMes[1];
         send_message("Login Successfull");
         return;
     } else if (listMes[0] == "Password") {
@@ -54,6 +62,11 @@ void Client::process_handle_server(const QString &mes)
 void Client::create_game()
 {
     emit create_game_signal(this);
+}
+
+void Client::join_game(const QString &host_name)
+{
+    emit join_game_signal(this, host_name);
 }
 
 void Client::send_message(const QString &message) {

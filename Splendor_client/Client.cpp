@@ -36,6 +36,8 @@ void Client::on_ready_read()
         return;
     } else if (listData[0] == "Login"){
         login_process(listData);
+    } else if (listData[0] == "Game") {
+        game_process(listData);
     }
 
 }
@@ -73,6 +75,16 @@ void Client::login_process(const QStringList &mes)
         return;
     } else if (mes[1] == "User") {
         emit user_not_found_login();
+        return;
+    }
+}
+
+void Client::game_process(const QStringList &mes)
+{
+    if (mes[1] == "Host") {
+        emit host_create_successfull();
+        return;
+    } else if (mes[1] == "Join") {
         return;
     }
 }

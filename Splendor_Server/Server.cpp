@@ -11,6 +11,8 @@ Server::Server(QObject *parent)
         qDebug() << "Server started...";
     }
 
+    connect(&gameManager, &GameManager::connect_to_host, this, &Server::add_player_to_host);
+    connect(&gameManager, &GameManager::host_created, this, &Server::host_created);
 
 }
 
@@ -30,5 +32,26 @@ void Server::on_client_connecting() {
 
     // for create game
     connect(client, &Client::create_game_signal, &gameManager, &GameManager::new_game);
+    connect(client, &Client::join_game_signal, &gameManager, &GameManager::join_in_game);
 
+}
+
+void Server::add_player_to_host(Client *player)
+{
+    foreach (Client* cl, _socketsList) {
+        if (cl->_username == player->_username) {
+            player->send_message("Game Join Accepted");
+            return;
+        }
+    }
+}
+
+void Server::host_created(Client *host)
+{
+    foreach (Client* cl, _socketsList) {
+        if (cl->_username == host->_username) {
+            host->send_message("Game Host Created");
+            return;
+        }
+    }
 }

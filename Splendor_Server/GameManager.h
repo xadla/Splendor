@@ -13,6 +13,11 @@ class GameManager : public QObject
 public:
     explicit GameManager(QObject *parent = nullptr);
     void new_game(Client *host);
+    void join_in_game(Client* player, const QString& hostName);
+
+signals:
+    void connect_to_host(Client* player);
+    void host_created(Client* host);
 
 private:
     QList<Game *> games;
