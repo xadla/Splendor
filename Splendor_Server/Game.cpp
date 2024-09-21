@@ -46,8 +46,18 @@ bool Game::is_player_in_game(Client *player)
 void Game::send_to_all(const QString &mes, Client* sender)
 {
     foreach (Client* cl, players) {
-        if(sender != cl) {
+        if(sender->get_useranme() != cl->get_useranme()) {
             cl->send_message("Game Message " + mes);
+        }
+    }
+}
+
+void Game::remove_player(Client *player)
+{
+    for(int i = 0; i < players.size(); i++) {
+        if (players[i]->get_useranme() == player->get_useranme()) {
+            players.removeAt(i);
+            return;
         }
     }
 }

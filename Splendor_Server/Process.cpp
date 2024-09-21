@@ -33,6 +33,12 @@ void Process::message_process(const QString &message)
     } else if (listData[0] == "Refresh") {
         emit resend_hosts();
         return;
+    } else if (listData[0] == "Disconnect") {
+        emit disconnect();
+        return;
+    } else if (listData[0] == "Delete") {
+        emit delete_game();
+        return;
     }
 
 }

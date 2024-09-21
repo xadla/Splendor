@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     // hide buttons
     ui->logout_btn->setVisible(false);
     ui->disconnect_btn->setVisible(false);
+    ui->delete_host_btn->setVisible(false);
 
     connect(loadingPage, &Loading::showHomeScreen, this, &MainWindow::HomeScreen);
 
@@ -41,6 +42,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(client, &Client::give_message, this, &MainWindow::message_from_player);
     connect(client, &Client::join_player, this, &MainWindow::join_player);
     connect(client, &Client::new_host_created, this, &MainWindow::add_host);
+    connect(client, &Client::new_player_add, this, &MainWindow::player_joined);
+    connect(client, &Client::host_delete, this, &MainWindow::delete_host_name);
 }
 
 MainWindow::~MainWindow()
@@ -165,7 +168,7 @@ void MainWindow::on_create_game_btn_clicked()
 void MainWindow::show_hosting()
 {
     ui->create_game_btn->setVisible(false);
-    ui->disconnect_btn->setVisible(true);
+    ui->delete_host_btn->setVisible(true);
     ui->message_le->setEnabled(true);
     ui->messages_list->addItem("Host Created");
 }
@@ -192,7 +195,7 @@ void MainWindow::message_from_player(const QString &mes)
 void MainWindow::join_player()
 {
     ui->message_le->setEnabled(true);
-    qDebug() << "Player joined the game";
+    qDebug() << "You joined the game";
 }
 
 void MainWindow::add_host(const QString &name)
@@ -207,5 +210,53 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_hosts_itemClicked(QListWidgetItem *item)
 {
+    if (_username.isEmpty()) {
+        qDebug() << "first login";
+        return;
+    }
     client->send_message("Join " + item->text());
+    ui->create_game_btn->setVisible(false);
+    ui->disconnect_btn->setVisible(true);
+}
+
+void MainWindow::player_joined(const QString &playerName)
+{
+    ui->messages_list->addItem(playerName + " Joined the game");
+    client->send_message("Message All " + playerName + " Joined the game");
+    ui->bot_level->setCurrentText(playerName);
+    ui->bot_level->setDisabled(true);
+}
+
+void MainWindow::on_disconnect_btn_clicked()
+{
+    client->send_message("Disconnect");
+
+    ui->message_le->setEnabled(false);
+    ui->messages_list->clear();
+    ui->create_game_btn->setVisible(true);
+    ui->disconnect_btn->setVisible(false);
+    ui->hosts->clearSelection();
+}
+
+void MainWindow::on_delete_host_btn_clicked()
+{
+    client->send_message("Delete");
+
+    ui->delete_host_btn->setVisible(false);
+    ui->message_le->setEnabled(false);
+    ui->messages_list->clear();
+    ui->create_game_btn->setVisible(true);
+    ui->hosts->clearSelection();
+}
+
+void MainWindow::delete_host_name(const QString &hostName)
+{
+    for(int i = 0; i < ui->hosts->count(); ++i)
+    {
+        QListWidgetItem* item = ui->hosts->item(i);
+        if (item->text() == hostName) {
+            delete item;
+            return;
+        }
+    }
 }

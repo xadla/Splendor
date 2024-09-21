@@ -25,6 +25,8 @@ signals:
     void join_game_signal(Client* player, const QString &host_name);
     void signal_for_game_message(Client* player, const QString& mes);
     void resend_hosts(Client* client);
+    void disconnect_from_server(Client* client);
+    void unHost(Client* client);
 
 private:
     QTcpSocket* _socket;
@@ -37,6 +39,8 @@ private:
     void join_game(const QString &host_name);
     void send_message_to_others(const QString &mes);
     void refresh_hosts();
+    void disconnect();
+    void delete_host();
 
     QString _username;
 

@@ -67,5 +67,10 @@ private slots:
     void add_host(const QString &name);
     void on_pushButton_clicked();
     void on_hosts_itemClicked(QListWidgetItem *item);
+
+    void player_joined(const QString& playerName);
+    void on_disconnect_btn_clicked();
+    void on_delete_host_btn_clicked();
+    void delete_host_name(const QString& hostName);
 };
 #endif // MAINWINDOW_H

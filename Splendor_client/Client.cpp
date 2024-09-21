@@ -97,5 +97,11 @@ void Client::game_process(const QStringList &mes)
     } else if (mes[1] == "NewHost") {
         emit new_host_created(mes[2]);
         return;
+    } else if (mes[1] == "Add") {
+        emit new_player_add(mes[2]);
+        return;
+    } else if (mes[1] == "Delete") {
+        emit host_delete(mes[2]);
+        return;
     }
 }

@@ -13,6 +13,7 @@ Server::Server(QObject *parent)
 
     connect(&gameManager, &GameManager::connect_to_host, this, &Server::add_player_to_host);
     connect(&gameManager, &GameManager::host_created, this, &Server::host_created);
+    connect(&gameManager, &GameManager::host_deleted, this, &Server::host_deleted);
 
 }
 
@@ -35,16 +36,20 @@ void Server::on_client_connecting() {
     connect(client, &Client::join_game_signal, &gameManager, &GameManager::join_in_game);
     connect(client, &Client::signal_for_game_message, &gameManager, &GameManager::send_message_game);
     connect(client, &Client::resend_hosts, this, &Server::resend_hosts);
+    connect(client, &Client::disconnect_from_server, &gameManager, &GameManager::disconnect_user);
+    connect(client, &Client::unHost, &gameManager, &GameManager::delete_host);
 
 }
 
-void Server::add_player_to_host(Client *player)
+void Server::add_player_to_host(Client *player, const QString& hostName)
 {
     foreach (Client* cl, _socketsList) {
         if (cl->_username == player->_username) {
             player->send_message("Game Join Accepted");
             qDebug() << "Player is joined";
             return;
+        } else if (cl->_username == hostName) {
+            cl->send_message("Game Add " + player->_username);
         }
     }
 }
@@ -64,5 +69,12 @@ void Server::resend_hosts(Client *giver)
 {
     foreach (QString name, gameManager.all_games()) {
         giver->send_message("Game NewHost " + name);
+    }
+}
+
+void Server::host_deleted(const QString &hostName)
+{
+    foreach (Client* cl, _socketsList) {
+        cl->send_message("Game Delete " + hostName);
     }
 }

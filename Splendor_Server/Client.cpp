@@ -20,6 +20,8 @@ Client::Client(QTcpSocket *socket, QObject *parent)
     connect(&process, &Process::join_game, this, &Client::join_game);
     connect(&process, &Process::message_to_game, this, &Client::send_message_to_others);
     connect(&process, &Process::resend_hosts, this, &Client::refresh_hosts);
+    connect(&process, &Process::disconnect, this, &Client::disconnect);
+    connect(&process, &Process::delete_game, this, &Client::delete_host);
 }
 
 QString Client::get_useranme()
@@ -80,6 +82,16 @@ void Client::send_message_to_others(const QString &mes)
 void Client::refresh_hosts()
 {
     emit resend_hosts(this);
+}
+
+void Client::disconnect()
+{
+    emit disconnect_from_server(this);
+}
+
+void Client::delete_host()
+{
+    emit unHost(this);
 }
 
 void Client::send_message(const QString &message) {

@@ -30,6 +30,8 @@ signals:
     void give_message(const QString &mes);
     void join_player();
     void new_host_created(const QString &hostName);
+    void new_player_add(const QString &playerName);
+    void host_delete(const QString& hostName);
 
 private slots:
     void on_ready_read();

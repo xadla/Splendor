@@ -27,7 +27,7 @@ void GameManager::join_in_game(Client* player, const QString &hostName)
     foreach (auto game, games) {
         if (game->get_host_username() == hostName) {
             game->add_player(player);
-            emit connect_to_host(player);
+            emit connect_to_host(player, hostName);
         }
     }
 }
@@ -48,4 +48,28 @@ QList<QString> GameManager::all_games()
         result.append(game->get_host_username());
     }
     return result;
+}
+
+void GameManager::disconnect_user(Client *client)
+{
+    foreach(Game* game, games) {
+        if (game->is_player_in_game(client)) {
+            game->remove_player(client);
+            game->send_to_all(client->get_useranme() + " is left the game", client);
+        }
+    }
+}
+
+void GameManager::delete_host(Client *client)
+{
+    for (int i = 0; i < games.size(); i++) {
+        if (games[i]->get_host_username() == client->get_useranme()) {
+            games[i]->quit();
+            games[i]->wait();
+            delete games[i];
+            games.removeAt(i);
+            emit host_deleted(client->get_useranme());
+            return;
+        }
+    }
 }

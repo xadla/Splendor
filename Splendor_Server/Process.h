@@ -21,6 +21,8 @@ signals:
     void join_game(const QString &host_name);
     void message_to_game(const QString &mes);
     void resend_hosts();
+    void disconnect();
+    void delete_game();
 
 };
 

@@ -2196,8 +2196,8 @@ padding: 6px;</string>
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>10</y>
+      <x>0</x>
+      <y>0</y>
       <width>1131</width>
       <height>71</height>
      </rect>
@@ -2289,7 +2289,7 @@ border: 1px solid #000;</string>
     <property name="geometry">
      <rect>
       <x>1080</x>
-      <y>90</y>
+      <y>60</y>
       <width>89</width>
       <height>31</height>
      </rect>
@@ -2364,6 +2364,25 @@ border:none;
     </property>
     <property name="text">
      <string>Send</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="delete_host_btn">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>100</y>
+      <width>89</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:5px;
+border: 2px solid #fff;
+background-color:none;
+color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>Delete Host</string>
     </property>
    </widget>
   </widget>

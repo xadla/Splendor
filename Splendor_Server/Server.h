@@ -27,9 +27,10 @@ private:
 
     // game
     GameManager gameManager;
-    void add_player_to_host(Client* player);
+    void add_player_to_host(Client* player, const QString& hostName);
     void host_created(Client *host);
     void resend_hosts(Client *giver);
+    void host_deleted(const QString& hostName);
 
 };
 

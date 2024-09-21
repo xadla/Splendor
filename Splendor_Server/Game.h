@@ -18,6 +18,8 @@ public:
     bool is_player_in_game(Client* player);
     void send_to_all(const QString &mes, Client* sender);
 
+    void remove_player(Client* player);
+
 private:
     int _id;
     Client* _host;
