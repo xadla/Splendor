@@ -85,6 +85,17 @@ void Client::game_process(const QStringList &mes)
         emit host_create_successfull();
         return;
     } else if (mes[1] == "Join") {
+        emit join_player();
+        return;
+    } else if (mes[1] == "Message") {
+        QString modifiedMessage = "";
+        for(int i = 2; i < mes.size(); i++) {
+            modifiedMessage += mes[i] + " ";
+        }
+        emit give_message(modifiedMessage);
+        return;
+    } else if (mes[1] == "NewHost") {
+        emit new_host_created(mes[2]);
         return;
     }
 }

@@ -27,6 +27,9 @@ signals:
     void connected();
     void connectionError(const QString &errorString);
     void host_create_successfull();
+    void give_message(const QString &mes);
+    void join_player();
+    void new_host_created(const QString &hostName);
 
 private slots:
     void on_ready_read();

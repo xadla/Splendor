@@ -10,10 +10,8 @@ CONFIG += c++17
 
 SOURCES += \
     Client.cpp \
-    Game.cpp \
     Loading.cpp \
     Login.cpp \
-    Player.cpp \
     ShowMessage.cpp \
     Signup.cpp \
     main.cpp \
@@ -21,16 +19,13 @@ SOURCES += \
 
 HEADERS += \
     Client.h \
-    Game.h \
     Loading.h \
     Login.h \
     MainWindow.h \
-    Player.h \
     ShowMessage.h \
     Signup.h
 
 FORMS += \
-    Game.ui \
     Loading.ui \
     Login.ui \
     MainWindow.ui \

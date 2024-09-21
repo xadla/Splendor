@@ -38,6 +38,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     // game connections
     connect(client, &Client::host_create_successfull, this, &MainWindow::show_hosting);
+    connect(client, &Client::give_message, this, &MainWindow::message_from_player);
+    connect(client, &Client::join_player, this, &MainWindow::join_player);
+    connect(client, &Client::new_host_created, this, &MainWindow::add_host);
 }
 
 MainWindow::~MainWindow()
@@ -106,6 +109,7 @@ void MainWindow::signup_back(const QString &situation)
         ui->logout_btn->setVisible(true);
         ui->name_le->setText(situation);
         ui->name_le->setDisabled(true);
+        _username = situation;
     }
 
     signup.hide();
@@ -121,6 +125,7 @@ void MainWindow::login_back(const QString &situation)
         ui->logout_btn->setVisible(true);
         ui->name_le->setText(situation);
         ui->name_le->setDisabled(true);
+        _username = situation;
     }
 
     login.hide();
@@ -149,6 +154,11 @@ void MainWindow::on_logout_btn_clicked()
 
 void MainWindow::on_create_game_btn_clicked()
 {
+    if (_username.isEmpty()) {
+        qDebug() << "first login and create after!";
+        return;
+    }
+
     client->send_message("Create Host");
 }
 
@@ -157,4 +167,45 @@ void MainWindow::show_hosting()
     ui->create_game_btn->setVisible(false);
     ui->disconnect_btn->setVisible(true);
     ui->message_le->setEnabled(true);
+    ui->messages_list->addItem("Host Created");
+}
+
+void MainWindow::on_send_button_clicked()
+{
+    QString text = ui->message_le->text();
+    if (!text.isEmpty()) {
+        ui->message_le->setText("");
+        text = _username + ":" + text;
+        ui->messages_list->addItem(text);
+        client->send_message("Message All " + text);
+
+    } else {
+        qDebug() << "Enter a message first";
+    }
+}
+
+void MainWindow::message_from_player(const QString &mes)
+{
+    ui->messages_list->addItem(mes);
+}
+
+void MainWindow::join_player()
+{
+    ui->message_le->setEnabled(true);
+    qDebug() << "Player joined the game";
+}
+
+void MainWindow::add_host(const QString &name)
+{
+    ui->hosts->addItem(name);
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    client->send_message("Refresh");
+}
+
+void MainWindow::on_hosts_itemClicked(QListWidgetItem *item)
+{
+    client->send_message("Join " + item->text());
 }

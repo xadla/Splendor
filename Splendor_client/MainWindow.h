@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <QMap>
 #include <QVector>
+#include <QListWidgetItem>
 
 #include "Loading.h"
 #include "ShowMessage.h"
@@ -60,5 +61,11 @@ private slots:
     void on_create_game_btn_clicked();
 
     void show_hosting();
+    void on_send_button_clicked();
+    void message_from_player(const QString& mes);
+    void join_player();
+    void add_host(const QString &name);
+    void on_pushButton_clicked();
+    void on_hosts_itemClicked(QListWidgetItem *item);
 };
 #endif // MAINWINDOW_H

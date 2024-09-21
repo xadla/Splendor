@@ -32,3 +32,22 @@ QString Game::get_host_username()
 {
     return _host->get_useranme();
 }
+
+bool Game::is_player_in_game(Client *player)
+{
+    foreach(Client* p, players) {
+        if (p == player) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void Game::send_to_all(const QString &mes, Client* sender)
+{
+    foreach (Client* cl, players) {
+        if(sender != cl) {
+            cl->send_message("Game Message " + mes);
+        }
+    }
+}

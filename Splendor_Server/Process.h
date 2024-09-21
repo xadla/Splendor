@@ -19,6 +19,8 @@ signals:
     void check_login(const QString &username, const QString &password);
     void create_game();
     void join_game(const QString &host_name);
+    void message_to_game(const QString &mes);
+    void resend_hosts();
 
 };
 

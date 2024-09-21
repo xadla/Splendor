@@ -6,6 +6,13 @@ GameManager::GameManager(QObject *parent)
     id = 1;
 }
 
+GameManager::~GameManager()
+{
+    foreach(Game* g, games) {
+        delete g;
+    }
+}
+
 void GameManager::new_game(Client *host)
 {
     Game *newGame = new Game(host, id++);
@@ -23,4 +30,22 @@ void GameManager::join_in_game(Client* player, const QString &hostName)
             emit connect_to_host(player);
         }
     }
+}
+
+void GameManager::send_message_game(Client *player, const QString &message)
+{
+    foreach (auto game, games) {
+        if (game->is_player_in_game(player)) {
+            game->send_to_all(message, player);
+        }
+    }
+}
+
+QList<QString> GameManager::all_games()
+{
+    QList<QString> result;
+    foreach (Game* game, games) {
+        result.append(game->get_host_username());
+    }
+    return result;
 }

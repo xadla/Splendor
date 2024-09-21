@@ -15,6 +15,9 @@ public:
 
     QString get_host_username();
 
+    bool is_player_in_game(Client* player);
+    void send_to_all(const QString &mes, Client* sender);
+
 private:
     int _id;
     Client* _host;
