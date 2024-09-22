@@ -36,7 +36,7 @@ QString Game::get_host_username()
 bool Game::is_player_in_game(Client *player)
 {
     foreach(Client* p, players) {
-        if (p == player) {
+        if (p->get_useranme() == player->get_useranme()) {
             return true;
         }
     }

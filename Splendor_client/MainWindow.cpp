@@ -19,6 +19,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->disconnect_btn->setVisible(false);
     ui->delete_host_btn->setVisible(false);
 
+    // add combo's
+    bot_levels.append(ui->bot_level);
+    bot_levels.append(ui->bot_level_2);
+    bot_levels.append(ui->bot_level_3);
+
     connect(loadingPage, &Loading::showHomeScreen, this, &MainWindow::HomeScreen);
 
     // same button in signup and signin
@@ -189,6 +194,19 @@ void MainWindow::on_send_button_clicked()
 
 void MainWindow::message_from_player(const QString &mes)
 {
+    QStringList allMes = mes.split(" ");
+    if (allMes[1] == "Joined") {
+
+        foreach(auto bot, bot_levels) {
+            if (bot->isEnabled()) {
+                ui->bot_level->setItemText(0, allMes[0]);
+                ui->bot_level->setCurrentIndex(0);
+                ui->bot_level->setDisabled(true);
+                return;
+            }
+        }
+    }
+
     ui->messages_list->addItem(mes);
 }
 
@@ -200,6 +218,15 @@ void MainWindow::join_player()
 
 void MainWindow::add_host(const QString &name)
 {
+
+    for(int i = 0; i < ui->hosts->count(); ++i)
+    {
+        QListWidgetItem* item = ui->hosts->item(i);
+        if (item->text() == name) {
+            return;
+        }
+    }
+
     ui->hosts->addItem(name);
 }
 
@@ -223,7 +250,7 @@ void MainWindow::player_joined(const QString &playerName)
 {
     ui->messages_list->addItem(playerName + " Joined the game");
     client->send_message("Message All " + playerName + " Joined the game");
-    ui->bot_level->setCurrentText(playerName);
+    ui->bot_level->setItemText(0, playerName);
     ui->bot_level->setDisabled(true);
 }
 

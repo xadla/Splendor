@@ -6,6 +6,7 @@
 #include <QMap>
 #include <QVector>
 #include <QListWidgetItem>
+#include <QComboBox>
 
 #include "Loading.h"
 #include "ShowMessage.h"
@@ -45,6 +46,8 @@ private:
     Client *client;
 
     QString _username;
+
+    QList<QComboBox *> bot_levels;
 
 signals:
     void showHomeScreen();
